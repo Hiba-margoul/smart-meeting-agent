@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # 1. Base de Données
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # 2. Service IA (Python)
+  ai-service:
+    build: ./ai-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-service:/app  # Hot-Reload : Si tu changes le code Python, ça se met à jour
+    environment:
+      - MODEL_SIZE=base
+
+  # 3. Backend (Spring Boot)
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+      - ai-service
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/meetingdb
+      - AI_SERVICE_URL=http://ai-service:8000
+
+  # 4. Frontend (Angular)
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Évite d'écraser les modules
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:

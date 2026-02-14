@@ -1,0 +1,34 @@
+<div class="meet-container">
+
+  <div class="participants-grid"> <div *ngFor="let p of participants"
+                                       class="participant-card"
+                                       [class.is-speaking]="isSpeaking(p)"> <ng-container *ngIf="isAgent(p)">
+    <div class="avatar agent-avatar-container">
+      <img src="agent.jpg" alt="IA Agent" class="agent-image">
+    </div>
+  </ng-container>
+
+    <ng-container *ngIf="!isAgent(p)">
+      <div class="avatar" [style.background-color]="stringToColor(p.identity)"> {{ p.identity.charAt(0) | uppercase }} </div>
+    </ng-container>
+
+    <div class="user-info"> <span>{{ p.name || p.identity }}</span> <i *ngIf="!p.isMicrophoneEnabled" class="fas fa-microphone-slash text-danger"></i> </div>
+
+    <div *ngIf="isSpeaking(p)" class="speaking-indicator"></div> </div></div>
+
+  <div class="bottom-bar">
+    <button (click)="toggleMic()" [class.off]="!isMicOn" class="control-btn" title="Micro">
+      <i class="fas" [ngClass]="isMicOn ? 'fa-microphone' : 'fa-microphone-slash'"></i>
+      <div class="icon-box1 bg-primary-subtle text-primary">
+        <img src="mute-micro.png" alt="Calendrier">
+      </div>
+    </button>
+
+    <button (click)="leaveMeet()" class="control-btn hangup" title="Quitter">
+      <div class="icon-box1 bg-primary-subtle text-primary">
+        <img src="finish-call.png" alt="Calendrier">
+      </div>
+    </button>
+  </div>
+
+</div>

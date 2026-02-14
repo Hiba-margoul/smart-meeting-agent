@@ -1,0 +1,272 @@
+/* --- Global Layout --- */
+.meethub-wrapper {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- HEADER SOFT --- */
+.header-soft-bg {
+  background-color: #f0f7ff;
+  border-bottom: 1px solid #eef2f6;
+  padding-bottom: 5rem; /* Augmenté pour laisser la place aux cartes */
+}
+
+.mt-n-5 {
+  margin-top: -3.5rem !important; /* Remonte le contenu sur le header */
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.2rem;
+}
+.page-subtitle { color: #64748b; font-size: 0.9rem; margin: 0; }
+
+/* --- STATS CARDS (NOUVEAU) --- */
+.stat-card {
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+}
+
+.icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-box img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+.icon-box1 {
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-box1 img {
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+}
+/* Custom Purple Color (Bootstrap n'a pas toujours de bg-purple) */
+.bg-purple-subtle { background-color: #f3e8ff; }
+.text-purple { color: #9333ea; }
+
+/* Badge styles update */
+.badge { font-weight: 500; padding: 0.5em 0.8em; }
+
+
+/* --- LE RESTE DU CSS (FILTRES, TABLEAU, ETC.) RESTE IDENTIQUE --- */
+
+/* --- Custom Tabs (Pills) --- */
+.status-tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.status-tabs::-webkit-scrollbar { display: none; }
+
+.tab-pill {
+  border: none;
+  background: transparent;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #64748b;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab-pill:hover { background-color: #fff; color: #334155; }
+
+.tab-pill.active {
+  background-color: #fff;
+  color: #0f172a;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-weight: 600;
+}
+
+/* --- Inputs Design --- */
+.input-group-clean {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.input-group-clean:focus-within { border-color: #3b82f6; }
+
+.input-group-clean input {
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: #334155;
+  background: transparent;
+}
+
+.date-input-clean {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  color: #334155;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.date-input-clean:focus { border-color: #3b82f6; }
+
+/* --- Table Styling --- */
+.table-responsive { border-radius: 8px; }
+
+.custom-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 600;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.custom-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.status-planned { background-color: #eff6ff; color: #3b82f6; }
+.status-active { background-color: #f0fdf4; color: #22c55e; }
+.status-finished { background-color: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+
+/* Avatars */
+.avatar-stack { display: flex; align-items: center; }
+.avatar-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  border: 2px solid white;
+  margin-right: -8px;
+  flex-shrink: 0;
+}
+
+/* --- Pagination Styles --- */
+.pagination .page-link {
+  color: #64748b;
+  margin: 0 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #eff6ff;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* --- PDF Panel --- */
+.pdf-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100vh;
+  background: #fff;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+/* ========================================= */
+/* RESPONSIVE MEDIA QUERIES            */
+/* ========================================= */
+
+@media (max-width: 768px) {
+  .page-title { font-size: 1.25rem; }
+  .page-subtitle { font-size: 0.8rem; }
+
+  .status-tabs { width: 100%; justify-content: space-between; }
+  .input-group-clean, .date-input-clean { padding: 10px; }
+
+  .pdf-panel { width: 100%; border-left: none; }
+  .pagination .page-link { width: 36px; height: 36px; }
+}
+.btn-logout:hover {
+  background-color: #dc3545;
+  color: white;
+  transition: all 0.2s ease;
+}
+.logo-header {
+  height: 50px; /* ajuste selon la taille de ton header */
+  width: auto;
+}
+/* Bouton Create Meet - bleu très clair */
+.btn-create {
+  background-color: #e3f2fd; /* bleu clair proche du blanc */
+  color: #0d6efd;            /* bleu principal du dashboard */
+  border: 1px solid #cfe3fb;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-create:hover {
+  background-color: #cfe3fb;
+  color: #0a58ca; /* bleu un peu plus foncé au hover */
+}
+
+/* Bouton Logout - presque blanc avec bordure bleue claire */
+.btn-logout {
+  background-color: #ffffff;
+  color: #0d6efd;
+  border: 1px solid #cfe3fb;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #e3f2fd;
+  color: #0a58ca;
+}

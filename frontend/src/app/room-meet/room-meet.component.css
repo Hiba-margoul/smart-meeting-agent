@@ -1,0 +1,169 @@
+/* --- Conteneur Principal --- */
+.meet-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.icon-box1 {
+  width: 1px;
+  height: 1px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-box1 img {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+/* --- Grille qui remplit l'espace --- */
+.participants-grid {
+  flex: 1; /* Prend tout l'espace restant (hauteur écran - barre du bas) */
+  display: flex;
+  flex-wrap: wrap; /* Permet le retour à la ligne */
+  padding: 10px;
+  gap: 10px;
+  align-content: stretch; /* Étire les lignes pour remplir la hauteur */
+}
+
+/* --- Carte Participant Flexible --- */
+.participant-card {
+  background-color: #2c2c2c;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  /* C'est ici que la magie opère pour le remplissage */
+  flex-grow: 1;       /* Grossir pour remplir le vide */
+  flex-basis: 400px;  /* Taille de base idéale avant de wrapper */
+  height: auto;       /* La hauteur s'adapte */
+  min-height: 300px;  /* Hauteur minimum pour ne pas être écrasé */
+  max-width: 100%;
+}
+
+/* --- Règles Spécifiques (CSS Quantity Queries) --- */
+
+/* CAS 1 : S'il n'y a qu'une seule personne -> Plein Écran (100%) */
+.participant-card:only-child {
+  flex-basis: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+/* CAS 2 : S'il y a exactement 2 personnes -> 50% chacune côte à côte */
+.participant-card:first-child:nth-last-child(2),
+.participant-card:first-child:nth-last-child(2) ~ .participant-card {
+  flex-basis: 48%; /* Un peu moins de 50% pour gérer le gap */
+  height: 100%;    /* Prend toute la hauteur */
+}
+
+/* Bordure quand on parle (Glow vert/cyan) */
+.participant-card.is-speaking {
+  border: 3px solid #00dbde;
+  box-shadow: inset 0 0 20px rgba(0, 219, 222, 0.3);
+}
+
+/* --- Avatar et Infos --- */
+.avatar {
+  width: 120px;
+  height: 120px;
+  background-color: #5f6368;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.user-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(0,0,0,0.6);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+/* --- Barre du bas --- */
+.bottom-bar {
+  height: 90px;
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.control-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  background-color: #3c4043;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.control-btn:hover {
+  background-color: #505458;
+  transform: scale(1.05);
+}
+
+.control-btn.off {
+  background-color: #ea4335; /* Rouge quand coupé */
+  color: white;
+}
+
+.control-btn.hangup {
+  background-color: #ea4335;
+  width: 65px;
+  border-radius: 35px; /* Forme de pilule pour raccrocher */
+}
+/* Style spécifique pour le conteneur de l'image agent (optionnel si le PNG est transparent) */
+.agent-avatar-container {
+  background-color: transparent; /* Ou une couleur de fond tech si vous préférez */
+  padding: 0;
+}
+
+/* Style pour l'image elle-même afin qu'elle remplisse le cercle */
+.agent-image {
+  width: 100%;
+  height: 100%;
+  /* 'cover' zoomera pour remplir tout le cercle sans déformer. */
+  /* Utilisez 'contain' si vous voulez voir le robot en entier, quitte à avoir des bords vides. */
+  object-fit: cover;
+  display: block;
+}
+
+/* Optionnel : Un effet visuel supplémentaire quand l'IA parle */
+.participant-card.is-speaking .agent-avatar-container {
+  /* Change la bordure en violet/bleu quand l'IA parle */
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}

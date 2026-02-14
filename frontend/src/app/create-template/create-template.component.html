@@ -1,0 +1,126 @@
+<div class="meethub-wrapper">
+
+  <div class="header-soft-bg">
+    <div class="container px-4 py-4">
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-back shadow-sm" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div>
+          <h1 class="page-title mb-0">Nouveau Modèle</h1>
+          <p class="page-subtitle">Définissez la structure de vos futurs rapports</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container px-4 mt-n-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-8"> <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+
+        <div class="card content-card border-0 shadow-sm mb-4">
+          <div class="card-body p-4 p-md-5">
+
+            <h5 class="fw-bold text-dark mb-4">Informations Générales</h5>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Nom du Template</label>
+              <div class="input-icon-wrapper">
+                <i class="bi bi-fonts text-muted"></i>
+                <input
+                  type="text"
+                  class="form-control form-custom"
+                  formControlName="name"
+                  placeholder="Ex: Rapport Hebdomadaire Technique"
+                  [class.is-invalid]="templateForm.get('name')?.invalid && templateForm.get('name')?.touched">
+              </div>
+              <div class="invalid-feedback d-block" *ngIf="templateForm.get('name')?.invalid && templateForm.get('name')?.touched">
+                Le nom est requis (3 caractères min).
+              </div>
+            </div>
+
+            <div class="mb-0">
+              <label class="form-label fw-semibold">Description</label>
+              <textarea
+                class="form-control form-custom h-auto py-3 ps-3"
+                formControlName="description"
+                rows="3"
+                placeholder="À quoi sert ce rapport ?"></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold text-dark m-0">Structure du Rapport</h5>
+          <button type="button" class="btn btn-sm btn-outline-primary fw-semibold bg-white" (click)="addSection()">
+            <i class="bi bi-plus-lg me-1"></i> Ajouter une section
+          </button>
+        </div>
+
+        <div formArrayName="sections">
+          <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i" class="card content-card border-0 shadow-sm mb-3 position-relative overflow-hidden section-block">
+
+            <div class="section-indicator"></div>
+
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge bg-primary-subtle text-primary rounded-pill">Section #{{ i + 1 }}</span>
+                <button type="button" class="btn btn-sm btn-link text-danger p-0 text-decoration-none" (click)="removeSection(i)" title="Supprimer">
+                  <i class="bi bi-trash"></i> Supprimer
+                </button>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label small text-muted">Code (Unique)</label>
+                  <input type="text" class="form-control form-custom-sm" formControlName="code" placeholder="INTRO">
+                  <div *ngIf="section.get('code')?.invalid && section.get('code')?.touched" class="text-danger small mt-1">Requis</div>
+                </div>
+                <div class="col-md-8">
+                  <label class="form-label small text-muted">Titre affiché</label>
+                  <input type="text" class="form-control form-custom-sm" formControlName="title" placeholder="Introduction">
+                  <div *ngIf="section.get('title')?.invalid && section.get('title')?.touched" class="text-danger small mt-1">Requis</div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label small text-muted">Instructions pour l'IA (Prompt)</label>
+                  <textarea class="form-control form-custom-sm bg-light" formControlName="guidance" rows="2" placeholder="Expliquez à l'IA ce qu'elle doit générer dans cette section..."></textarea>
+                </div>
+
+                <div class="col-12 d-flex align-items-center gap-4 mt-2">
+                  <div class="d-flex align-items-center gap-2">
+                    <label class="small text-muted mb-0">Ordre:</label>
+                    <input type="number" class="form-control form-custom-sm text-center" style="width: 60px;" formControlName="order">
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" formControlName="enabled" [id]="'enabled-'+i">
+                    <label class="form-check-label small" [for]="'enabled-'+i">Activé par défaut</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="sections.length === 0" class="text-center py-5 text-muted">
+          <i class="bi bi-layout-text-window-reverse fs-1 d-block mb-2 opacity-50"></i>
+          Aucune section définie. Cliquez sur "Ajouter une section".
+        </div>
+
+        <div class="d-grid gap-3 mt-4 mb-5">
+          <button type="submit" class="btn btn-primary btn-lg shadow-sm" [disabled]="templateForm.invalid">
+            <i class="bi bi-check2-circle me-2"></i> Enregistrer le Modèle
+          </button>
+          <button type="button" class="btn btn-link text-muted text-decoration-none" (click)="goBack()">
+            Annuler
+          </button>
+        </div>
+
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>

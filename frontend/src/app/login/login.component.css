@@ -1,0 +1,121 @@
+/* --- Wrapper Plein Écran --- */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: center;
+  background-color: #f3f4f6; /* Gris très doux */
+  /* Optionnel : Dégradé subtil */
+  background: linear-gradient(135deg, #f0f7ff 0%, #f3f4f6 100%);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: 20px;
+}
+
+/* --- Logo Brand --- */
+.brand-logo {
+  width: 50px;
+  height: 50px;
+  background: #0d6efd; /* Bleu primaire */
+  color: white;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+}
+
+/* --- Carte Login --- */
+.login-card {
+  border-radius: 20px; /* Coins bien arrondis */
+  border: 1px solid rgba(255,255,255,0.8); /* Bordure subtile */
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05) !important; /* Ombre douce et large */
+  backdrop-filter: blur(10px); /* Effet verre dépoli si supporté */
+}
+
+/* --- Inputs Customisés --- */
+.input-icon-group {
+  position: relative;
+}
+
+.input-icon-group i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 1.1rem;
+  pointer-events: none; /* Laisse passer le clic vers l'input */
+  transition: color 0.2s;
+}
+
+.form-custom {
+  background-color: #f9fafb; /* Gris très clair par défaut */
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px 12px 12px 45px; /* Espace pour l'icône */
+  font-size: 0.95rem;
+  color: #1f2937;
+  height: 48px;
+  transition: all 0.2s ease;
+}
+
+.form-custom:focus {
+  background-color: #fff;
+  border-color: #3b82f6; /* Bleu focus */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+
+/* Change la couleur de l'icône quand on focus l'input */
+.form-custom:focus + i,
+.input-icon-group:focus-within i {
+  color: #3b82f6;
+}
+
+.form-custom::placeholder {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* --- Bouton --- */
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #0b5ed7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Messages d'erreur */
+.invalid-feedback {
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+.icon-box {
+  width: 68px;
+  height: 68px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-box img {
+  width: 68px;
+  height: 68px;
+  border-radius: 12px;
+}

@@ -1,0 +1,99 @@
+<div class="meethub-wrapper">
+
+  <div class="header-soft-bg">
+    <div class="container px-4 py-4">
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-back shadow-sm" (click)="goBack()">
+          <div class="icon-box bg-primary-subtle text-primary">
+            <img src="retour.png" alt="Retour" class="icon-img">
+          </div>
+        </button>
+        <div>
+          <h1 class="page-title mb-0">Éditer le Rapport</h1>
+          <p class="page-subtitle">Modifiez le contenu et validez les sections</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container px-4 mt-n-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+
+        <div *ngIf="isLoading" class="card content-card border-0 shadow-sm p-5 text-center">
+          <div class="spinner-border text-primary mb-3" role="status"></div>
+          <p class="text-muted">Chargement du rapport en cours...</p>
+        </div>
+
+        <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+
+          <div class="card content-card border-0 shadow-sm mb-4">
+            <div class="card-body p-4 p-md-5">
+
+              <div *ngIf="successMessage" class="alert alert-success d-flex align-items-center mb-4 rounded-3">
+                <i class="bi bi-check-circle-fill me-2 fs-5"></i> {{ successMessage }}
+              </div>
+              <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center mb-4 rounded-3">
+                <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i> {{ errorMessage }}
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label fw-bold text-dark">Titre du document</label>
+                <div class="input-icon-wrapper">
+                  <i class="bi bi-file-text text-muted"></i>
+                  <input
+                    type="text"
+                    class="form-control form-custom fs-5 fw-semibold"
+                    formControlName="title"
+                    placeholder="Titre du rapport">
+                </div>
+              </div>
+
+              <hr class="my-5 text-muted opacity-25">
+
+              <h5 class="fw-bold text-dark mb-4">Contenu des Sections</h5>
+
+              <div formArrayName="sections">
+                <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i"
+                     class="section-block p-4 mb-4 rounded-3 bg-light-subtle border border-light-subtle">
+
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-primary-subtle text-primary rounded-pill me-2">Section {{ i + 1 }}</span>
+                    <span class="text-muted small text-uppercase fw-bold">{{ section.get('code')?.value }}</span>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label small text-muted">Sous-titre</label>
+                    <input type="text" class="form-control form-custom bg-white" formControlName="title">
+                  </div>
+
+                  <div class="mb-0">
+                    <label class="form-label small text-muted">Corps du texte</label>
+                    <textarea
+                      class="form-control form-custom h-auto py-3 bg-white"
+                      formControlName="content"
+                      rows="8"
+                      placeholder="Rédigez le contenu ici..."></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="d-grid gap-3 d-md-flex justify-content-md-end mt-5">
+                <button type="button" class="btn btn-link text-muted text-decoration-none" (click)="goBack()">
+                  Annuler
+                </button>
+                <button type="submit" class="btn btn-primary btn-lg shadow-sm px-5" [disabled]="reportForm.invalid || isLoading">
+                  <i class="bi bi-save me-2"></i> Enregistrer
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
